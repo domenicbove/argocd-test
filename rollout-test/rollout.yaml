@@ -43,13 +43,15 @@ metadata:
   name: rollout-bluegreen-active
   namespace: rollout-test
 spec:
-  type: NodePort
+  # type: NodePort
   selector:
     app: rollout-bluegreen
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 8080
+    # port: 80
+    # targetPort: 8080
+    port: 8080
+    # targetPort: 8080
 ---
 kind: Service
 apiVersion: v1
@@ -57,10 +59,35 @@ metadata:
   name: rollout-bluegreen-preview
   namespace: rollout-test
 spec:
-  type: NodePort
+  # type: NodePort
   selector:
     app: rollout-bluegreen
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 8080
+    port: 8080
+    # targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bluegreen-ingress
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /active(/|$)(.*)
+        backend:
+          service:
+            name: rollout-bluegreen-active
+            port:
+              number: 8080
+      - pathType: Prefix
+        path: /preview(/|$)(.*)
+        backend:
+          service:
+            name: rollout-bluegreen-preview
+            port:
+              number: 8080

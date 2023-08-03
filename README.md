@@ -43,14 +43,17 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ``` 
 
-4. Expose UI
-```
-kubectl port-forward svc/argocd-server -n argocd 8080:443
-```
-
-5. Copy down the Admin Password
+4. Copy down the Admin Password
 ```
 k get secret argocd-initial-admin-secret -n argocd --template={{.data.password}} | base64 -d
+
+# to copy it
+k get secret argocd-initial-admin-secret -n argocd --template={{.data.password}} | base64 -d | pbcopy
+```
+
+5. Expose UI
+```
+kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
 6. Login with admin/<password>
@@ -65,3 +68,4 @@ argocd app create bootstrap-applications --repo https://github.com/domenicbove/a
 --dest-namespace default --sync-policy auto
 ```
 
+8. In the browser view your applications syncing, navigate to https://localhost:8080
