@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rollout-test
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: rollout-test
+    repoURL: https://github.com/domenicbove/argocd-test.git
+  syncPolicy:
+    automated: {}
