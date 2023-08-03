@@ -38,8 +38,10 @@ k get secret argocd-initial-admin-secret -n argocd --template={{.data.password}}
 argocd login localhost:8080 --insecure
 ```
 
-7. Bootstrap Argo Applications
+7. Bootstrap Argo Applications. All ArgoCD Application definitions will live in the `argocd-applications/` directory. With this one command we can provision everything!
 ```
-argocd app create  --repo https://github.com/domenicbove/argocd-test.git --path argocd-applications --dest-server https://kubernetes.default.svc --dest-namespace default
+argocd app create bootstrap-applications --repo https://github.com/domenicbove/argocd-test.git \
+--path argocd-applications --dest-server https://kubernetes.default.svc \
+--dest-namespace default --sync-policy auto
+```
 
-```
