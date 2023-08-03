@@ -79,14 +79,14 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: /active(/|$)(.*)
+        path: /active
         backend:
           service:
             name: rollout-bluegreen-active
             port:
               number: 8080
       - pathType: Prefix
-        path: /preview(/|$)(.*)
+        path: /preview
         backend:
           service:
             name: rollout-bluegreen-preview
