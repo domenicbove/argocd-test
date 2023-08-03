@@ -2,6 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: foo-app
+  namespace: ingress-test
   labels:
     app: foo
 spec:
@@ -18,6 +19,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: foo-service
+  namespace: ingress-test
 spec:
   selector:
     app: foo
@@ -29,6 +31,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: bar-app
+  namespace: ingress-test
   labels:
     app: bar
 spec:
@@ -45,6 +48,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: bar-service
+  namespace: ingress-test
 spec:
   selector:
     app: bar
@@ -56,6 +60,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: example-ingress
+  namespace: ingress-test
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:

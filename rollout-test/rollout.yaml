@@ -71,6 +71,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bluegreen-ingress
+  namespace: rollout-test
   # annotations:
   #   nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
