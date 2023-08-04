@@ -57,7 +57,7 @@ argocd app create bootstrap-applications --repo https://github.com/domenicbove/a
 kubectl get secret argocd-initial-admin-secret -n argocd --template={{.data.password}} | base64 -d | pbcopy
 ```
 
-9. Argo will deploy everything automatically because `--sync-policy auto` - you can watch the sync status in the ui. Eventually lets try our podinfo sample app
+9. Argo will deploy everything automatically because `--sync-policy auto` - you can watch the sync status in the ui. Eventually lets try our podinfo sample app. After running below command go to http://localhost:9898
 ```
 kubectl -n podinfo port-forward svc/podinfo 9898:9898
 ```
