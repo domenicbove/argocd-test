@@ -13,7 +13,7 @@ spec:
     repoURL: https://github.com/domenicbove/argocd-test.git
     helm:
       valueFiles:
-      - podinfo/values.yaml
+      - ../../podinfo/values.yaml
       # values: |
       #   ui:
       #     color: "#3242a8"
