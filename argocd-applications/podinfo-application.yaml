@@ -10,8 +10,7 @@ spec:
   project: default
   source:
     chart: podinfo
-    path: charts/podinfo
-    repoURL: https://github.com/domenicbove/argocd-test.git
+    repoURL: https://github.com/domenicbove/argocd-test/tree/main/charts/podinfo
     targetRevision: 6.4.0
     helm:
       releaseName: podinfo
