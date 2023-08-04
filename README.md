@@ -81,10 +81,10 @@ kubectl -n podinfo port-forward svc/podinfo-preview 9999:9898
 
 13. If you like it lets promote it, but first lets watch the promotion
 ```
-kubectl argo rollouts get rollout podinfo --watch
+kubectl argo rollouts get rollout podinfo -n podinfo --watch
 ```
 
 14. Next promote it!
 ```
-kubectl argo rollouts promote podinfo
+kubectl argo rollouts promote podinfo -n podinfo
 ```
