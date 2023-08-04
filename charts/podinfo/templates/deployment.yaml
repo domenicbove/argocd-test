@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ template "podinfo.fullname" . }}
   labels:
@@ -9,9 +9,10 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
+    blueGreen: 
+      activeService: {{ template "podinfo.fullname" . }}
+      previewService: {{ template "podinfo.fullname" . }}-preview
+      autoPromotionEnabled: false
   selector:
     matchLabels:
       {{- include "podinfo.selectorLabels" . | nindent 6 }}
