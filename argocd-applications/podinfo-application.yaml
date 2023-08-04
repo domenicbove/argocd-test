@@ -12,9 +12,11 @@ spec:
     path: charts/podinfo
     repoURL: https://github.com/domenicbove/argocd-test.git
     helm:
-      values: |
-        ui:
-          color: "#3242a8"
+      valueFiles:
+      - podinfo/values.yaml
+      # values: |
+      #   ui:
+      #     color: "#3242a8"
   syncPolicy:
     automated: {}
     syncOptions:
