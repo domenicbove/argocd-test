@@ -7,7 +7,8 @@ spec:
   project: default
   source:
     chart: podinfo
-    repoURL: https://stefanprodan.github.io/podinfo
+    repoURL: oci://ghcr.io/stefanprodan/charts
+    targetRevision: 6.4.0
     helm:
       releaseName: podinfo
   destination:
