@@ -14,10 +14,16 @@ spec:
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   strategy:
+    {{- if .Values.rollouts.enabled }}
     blueGreen: 
       activeService: {{ template "podinfo.fullname" . }}
       previewService: {{ template "podinfo.fullname" . }}-preview
       autoPromotionEnabled: false
+    {{- else }}
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+    {{- end }}
   selector:
     matchLabels:
       {{- include "podinfo.selectorLabels" . | nindent 6 }}
