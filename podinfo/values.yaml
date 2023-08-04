@@ -1,4 +1,4 @@
 rollouts:
   enabled: true
 ui:
-  color: "#bfb119" # update this color hex
+  color: "#bf193d" # update this color hex
