@@ -1,11 +1,19 @@
 # ArgoCD with Argo Rollouts POC
 
-A simple example of running ArgoCD on KIND, and then triggering blue/green deployments of a sample application triggered by GitOps!
+A simple example of managing a Helm deployment with ArgoCD (and GitOps), and then triggering a Argo Rollouts blue/green deployment with a single Git commit
 
 ## Prerequisites
-- Install Kind and start a cluster
+- Any kubernetes cluster, I used minikube
 ```
 minikube start
+```
+- The ArgoCD CLI
+```
+brew install argocd
+```
+- The Argo Rollouts CLI
+```
+brew install argoproj/tap/kubectl-argo-rollouts
 ```
 
 ## Usage
@@ -42,10 +50,37 @@ argocd app create bootstrap-applications --repo https://github.com/domenicbove/a
 --dest-namespace default --sync-policy auto
 ```
 
-8. In the browser view your applications syncing, navigate to https://localhost:8080 and for user enter `admin`
+7. In the browser view your applications syncing, navigate to https://localhost:8080 and for user enter `admin`
 
-7. Copy the Admin Password and paste into browser
+8. Copy the Admin Password and paste into browser
 ```
 kubectl get secret argocd-initial-admin-secret -n argocd --template={{.data.password}} | base64 -d | pbcopy
 ```
 
+9. Argo will deploy everything automatically because `--sync-policy auto` - you can watch the sync status in the ui. Eventually lets try our podinfo sample app
+```
+kubectl -n podinfo port-forward svc/podinfo 9898:9898
+```
+
+10. No suppose you dislike the background color, lets update that. Change the color in `podinfo/values.yaml`, commit the change and push!
+```
+ui:
+  color: "#bf193d" # update this color hex
+```
+
+11. Because I have setup the podinfo chart to use an Argo `Rollout` object, and sync is automatic we will get new pods spun up! Lets port-forward the preview service!
+```
+kubectl -n podinfo port-forward svc/podinfo-preview 9898:9999
+```
+
+12. Check out the new color! Go to http://localhost:9999
+
+13. If you like it lets promote it, but first lets watch the promotion
+```
+kubectl argo rollouts get rollout podinfo --watch
+```
+
+14. Next promote it!
+```
+kubectl argo rollouts promote podinfo
+```
