@@ -42,9 +42,10 @@ argocd app create bootstrap-applications --repo https://github.com/domenicbove/a
 --dest-namespace default --sync-policy auto
 ```
 
-7. Copy down the Admin Password
+8. In the browser view your applications syncing, navigate to https://localhost:8080 and for user enter `admin`
+
+7. Copy the Admin Password and paste into browser
 ```
 kubectl get secret argocd-initial-admin-secret -n argocd --template={{.data.password}} | base64 -d | pbcopy
 ```
 
-8. In the browser view your applications syncing, navigate to https://localhost:8080 and enter `admin` and paste in the password
