@@ -73,7 +73,8 @@ metadata:
   name: bluegreen-ingress
   namespace: rollout-test
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    # nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/app-root: /app1
 spec:
   rules:
   - http:
