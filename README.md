@@ -62,15 +62,19 @@ kubectl get secret argocd-initial-admin-secret -n argocd --template={{.data.pass
 kubectl -n podinfo port-forward svc/podinfo 9898:9898
 ```
 
-10. No suppose you dislike the background color, lets update that. Change the color in `podinfo/values.yaml`, commit the change and push!
+10. No suppose you dislike the background color, lets update that. Change the color in `podinfo/values.yaml`. And push the change
 ```
 ui:
   color: "#bf193d" # update this color hex
 ```
 
+```
+git add . && git commit -m 'changed color' && git push origin main
+```
+
 11. Because I have setup the podinfo chart to use an Argo `Rollout` object, and sync is automatic we will get new pods spun up! Lets port-forward the preview service!
 ```
-kubectl -n podinfo port-forward svc/podinfo-preview 9898:9999
+kubectl -n podinfo port-forward svc/podinfo-preview 9999:9898
 ```
 
 12. Check out the new color! Go to http://localhost:9999
