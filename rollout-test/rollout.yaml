@@ -73,21 +73,21 @@ metadata:
   name: bluegreen-ingress
   namespace: rollout-test
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    # nginx.ingress.kubernetes.io/rewrite-target: /$2
     # nginx.ingress.kubernetes.io/app-root: /app1
 spec:
   rules:
   - http:
       paths:
       - pathType: Prefix
-        path: /active(/|$)(.*)
+        path: /active
         backend:
           service:
             name: rollout-bluegreen-active
             port:
               number: 8080
       - pathType: Prefix
-        path: /preview(/|$)(.*)
+        path: /preview
         backend:
           service:
             name: rollout-bluegreen-preview
