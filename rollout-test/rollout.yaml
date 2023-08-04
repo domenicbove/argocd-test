@@ -81,7 +81,7 @@ spec:
   - http:
       paths:
       - pathType: Prefix
-        path: /
+        path: /active(/|$)(.*)
         backend:
           service:
             name: rollout-bluegreen-active
