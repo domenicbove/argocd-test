@@ -9,10 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: podinfo
-    repoURL: https://github.com/domenicbove/argocd-test/tree/main/charts/podinfo
-    targetRevision: 6.4.0
-    helm:
-      releaseName: podinfo
+    path: charts/podinfo
+    repoURL: https://github.com/domenicbove/argocd-test.git
   syncPolicy:
     automated: {}
