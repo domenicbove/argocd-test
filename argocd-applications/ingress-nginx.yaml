@@ -11,5 +11,5 @@ spec:
   source:
     path: ingress-nginx
     repoURL: https://github.com/domenicbove/argocd-test.git
-  syncPolicy:
-    automated: {}
+  # syncPolicy:
+  #   automated: {}
