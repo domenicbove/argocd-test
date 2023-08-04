@@ -16,6 +16,5 @@ spec:
       valueFiles:
       - ../../podinfo-nonsync/values.yaml
   syncPolicy:
-    automated: {}
     syncOptions:
     - CreateNamespace=true
