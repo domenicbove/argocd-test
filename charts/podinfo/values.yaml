@@ -11,6 +11,9 @@ image:
   tag: 6.4.0
   pullPolicy: IfNotPresent
 
+rollouts:
+  enabled: false
+
 ui:
   color: "#34577c"
   message: ""
