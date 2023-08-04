@@ -11,6 +11,7 @@ spec:
   source:
     path: charts/podinfo
     repoURL: https://github.com/domenicbove/argocd-test.git
+    targetRevision: main
     helm:
       valueFiles:
       - ../../podinfo/values.yaml
