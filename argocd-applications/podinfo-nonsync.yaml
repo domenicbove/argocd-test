@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: podinfo-nonsync
+  namespace: argocd
+spec:
+  destination:
+    namespace: podinfo-nonsync
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: charts/podinfo
+    repoURL: https://github.com/domenicbove/argocd-test.git
+    targetRevision: main
+    helm:
+      valueFiles:
+      - ../../podinfo-nonsync/values.yaml
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
